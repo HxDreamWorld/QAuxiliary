@@ -51,6 +51,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import cc.ioctl.fragment.ExfriendListFragment
 import cc.ioctl.hook.misc.DisableHotPatch
+import cc.ioctl.util.ExfriendCompat
 import cc.ioctl.util.ExfriendManager
 import cc.ioctl.util.HostInfo
 import cc.ioctl.util.LayoutHelper
@@ -399,7 +400,7 @@ class TroubleshootFragment : BaseRootLayoutFragment() {
                 it.remove()
             }
         }
-        exm.saveConfigure()
+        ExfriendCompat.saveConfigure(exm)
         Toasts.success(requireContext(), "操作成功")
     }
 
@@ -650,7 +651,7 @@ class TroubleshootFragment : BaseRootLayoutFragment() {
         wrapper.putExtra(ActProxyMgr.ACTIVITY_PROXY_INTENT, inner)
         val pi = PendingIntent.getActivity(HostInfo.getApplication(), 0, wrapper, PendingIntent.FLAG_IMMUTABLE)
         val nm = app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val n = ExfriendManager.getCurrent().createNotiComp(nm, "Ticker", "Title", "Content", longArrayOf(100, 200, 200, 100), pi)
+        val n = ExfriendCompat.createNotiComp(ExfriendManager.getCurrent(), nm, "Ticker", "Title", "Content", longArrayOf(100, 200, 200, 100), pi)
         nm.notify(ExfriendManager.ID_EX_NOTIFY, n)
     }
 
