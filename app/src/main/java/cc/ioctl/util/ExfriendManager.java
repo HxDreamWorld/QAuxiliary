@@ -88,8 +88,8 @@ public class ExfriendManager {
     private static ExecutorService tp;
     private volatile long lastUpdateTimeSec;
     private long mUin;
-    public ConcurrentHashMap<Long, FriendRecord> persons;
-    public ConcurrentHashMap<Integer, EventRecord> events;
+    private ConcurrentHashMap<Long, FriendRecord> persons;
+    private ConcurrentHashMap<Integer, EventRecord> events;
     private ConfigManager mConfig;
     private ConcurrentHashMap mStdRemarks;
     private ArrayList<FriendChunk> cachedFriendChunks;

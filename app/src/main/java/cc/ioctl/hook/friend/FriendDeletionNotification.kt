@@ -26,7 +26,6 @@ import android.content.Context
 import android.view.View
 import cc.ioctl.fragment.ExfriendListFragment
 import cc.ioctl.hook.DeletionObserver
-import cc.ioctl.util.ExfriendCompat
 import cc.ioctl.util.ExfriendManager
 import io.github.qauxv.activity.SettingsUiFragmentHostActivity.Companion.startFragmentWithContext
 import io.github.qauxv.base.IEntityAgent
@@ -66,7 +65,7 @@ object FriendDeletionNotification : BaseFunctionHook(defaultEnabled = true), IUi
                         return false
                     }
                     val exf = ExfriendManager.get(uin)
-                    return ExfriendCompat.isNotifyWhenDeleted(exf)
+                    return exf.isNotifyWhenDeleted
                 }
                 set(value) {
                     val uin = AppRuntimeHelper.getLongAccountUin()
@@ -74,7 +73,7 @@ object FriendDeletionNotification : BaseFunctionHook(defaultEnabled = true), IUi
                         return
                     }
                     val exf = ExfriendManager.get(uin)
-                    ExfriendCompat.setNotifyWhenDeleted(exf, value)
+                    exf.isNotifyWhenDeleted = value
                 }
 
             override val isCheckable = AppRuntimeHelper.getLongAccountUin() >= 10000L
